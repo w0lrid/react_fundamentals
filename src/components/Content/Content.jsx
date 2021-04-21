@@ -1,4 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+
+import { STATE_OF_MAIN_CONTENT } from "../../constants";
 
 import Search from "../Search/Search";
 import Button from "../Button/Button";
@@ -20,7 +23,7 @@ function Content(props) {
 
   return (
     <>
-      {state === "start" ? (
+      {state === STATE_OF_MAIN_CONTENT.initialView ? (
         <>
           <div className="row mb-3">
             <div className="col input-group">
@@ -29,7 +32,7 @@ function Content(props) {
             <div className="col-2 offset-md-3">
               <Button
                 text="Add new course"
-                onClick={() => setState("create-form")}
+                onClick={() => setState(STATE_OF_MAIN_CONTENT.createFormView)}
               />
             </div>
           </div>
@@ -42,11 +45,15 @@ function Content(props) {
         </>
       ) : (
         <>
-          <NewCourseForm state="create-form" />
+          <NewCourseForm state={STATE_OF_MAIN_CONTENT.createFormView} />
         </>
       )}
     </>
   );
 }
+
+Content.propTypes = {
+  state: PropTypes.string,
+};
 
 export default Content;

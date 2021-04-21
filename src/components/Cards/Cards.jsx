@@ -1,7 +1,9 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 import CourseCard from "../CourseCard/CourseCard";
 
-function Courses(props) {
-  console.log(props.authors);
+function Cards(props) {
   const filtered = props.filteredCourses.map((course) => (
     <CourseCard
       course={course}
@@ -15,4 +17,8 @@ function Courses(props) {
   return <>{filtered}</>;
 }
 
-export default Courses;
+Cards.propTypes = {
+  filteredCourses: PropTypes.array,
+};
+
+export default Cards;

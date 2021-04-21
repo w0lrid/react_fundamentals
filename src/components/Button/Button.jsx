@@ -1,3 +1,6 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 function Button(props) {
   return (
     <button type="button" className="btn border-info" onClick={props.onClick}>
@@ -5,5 +8,10 @@ function Button(props) {
     </button>
   );
 }
+
+Button.propTypes = {
+  text: PropTypes.string,
+  onClick: PropTypes.func,
+};
 
 export default Button;

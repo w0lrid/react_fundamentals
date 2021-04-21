@@ -1,3 +1,6 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 function Input(props) {
   return (
     <>
@@ -11,5 +14,10 @@ function Input(props) {
     </>
   );
 }
+
+Input.propTypes = {
+  className: PropTypes.string,
+  placeholder: PropTypes.string,
+};
 
 export default Input;
