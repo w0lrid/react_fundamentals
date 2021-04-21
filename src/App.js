@@ -1,5 +1,6 @@
+import React, { useState } from "react";
 import "./App.css";
-import { useState } from "react";
+
 import { STATE_OF_MAIN_CONTENT } from "./constants";
 
 import Header from "./components/Header/Header";

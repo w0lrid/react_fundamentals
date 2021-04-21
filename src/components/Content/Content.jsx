@@ -1,6 +1,6 @@
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import { useState } from "react";
 import { STATE_OF_MAIN_CONTENT } from "../../constants";
 
 import Search from "../Search/Search";
