@@ -1,0 +1,18 @@
+header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 2% 5%;
+  padding: 20px 3%;
+  border: 1px solid rgb(255, 129, 129);
+  border-radius: 5px;
+}
+
+.logo {
+  cursor: pointer;
+  margin-right: auto;
+}
+
+.name {
+  margin-right: 50px;
+}

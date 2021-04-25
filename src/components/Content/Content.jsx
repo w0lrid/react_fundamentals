@@ -1,16 +1,14 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import styles from "./Content.module.css";
 
-import { STATE_OF_MAIN_CONTENT } from "../../constants";
-
-import Search from "../Search/Search";
+import Input from "../Input/Input";
 import Button from "../Button/Button";
 import Cards from "../Cards/Cards";
 import Data from "../../data.json";
-import NewCourseForm from "../NewCourseForm/NewCourseForm";
 
 function Content(props) {
-  const [state, setState] = useState(props.state);
   const [courseName, setCourseName] = useState("");
 
   const filteredCourses = Data.mockedCourseList.filter((course) =>
@@ -23,31 +21,21 @@ function Content(props) {
 
   return (
     <>
-      {state === STATE_OF_MAIN_CONTENT.initialView ? (
-        <>
-          <div className="row mb-3">
-            <div className="col input-group">
-              <Search data={Data} onChange={handleChangeForButton} />
-            </div>
-            <div className="col-2 offset-md-3">
-              <Button
-                text="Add new course"
-                onClick={() => setState(STATE_OF_MAIN_CONTENT.createFormView)}
-              />
-            </div>
-          </div>
-          <div className="row mx-auto">
-            <Cards
-              filteredCourses={filteredCourses}
-              authors={Data.mockedAuthorsList}
-            />
-          </div>
-        </>
-      ) : (
-        <>
-          <NewCourseForm state={STATE_OF_MAIN_CONTENT.createFormView} />
-        </>
-      )}
+      <div className={styles.searchContainer}>
+        <div className={styles.searchBar}>
+          <Input placeholder="Enter course name..." />
+          <Button onClick={handleChangeForButton} text="Search" />
+        </div>
+        <Link to="/courses/add">
+          <Button text="Add new course" />
+        </Link>
+      </div>
+      <div className={styles.cardsContainer}>
+        <Cards
+          filteredCourses={filteredCourses}
+          authors={Data.mockedAuthorsList}
+        />
+      </div>
     </>
   );
 }

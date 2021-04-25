@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styles from "./Button.module.css";
 
 function Button(props) {
   return (
-    <button type="button" className="btn border-info" onClick={props.onClick}>
+    <button type="button" onClick={props.onClick}>
       {props.text}
     </button>
   );
