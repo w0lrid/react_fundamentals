@@ -4,8 +4,12 @@ import styles from "./CourseCard.module.css";
 
 import Button from "../Button/Button";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deleteCourse } from "../../store/slices/courseSlice";
 
 function CourseCard(props) {
+  const dispatch = useDispatch();
+
   return (
     <div className={styles.container}>
       <div className={styles.description}>
@@ -29,6 +33,12 @@ function CourseCard(props) {
           <Link to={`/courses/${props.course.title}`}>
             <Button text="Show course" />
           </Link>
+        </div>
+        <div className={styles.button}>
+          <Button
+            text="Delete course"
+            onClick={() => dispatch(deleteCourse({ id: props.course.id }))}
+          />
         </div>
       </div>
     </div>

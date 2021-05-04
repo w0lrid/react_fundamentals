@@ -1,21 +1,26 @@
-import React from "react";
-import PropTypes from "prop-types";
-
+import { useSelector } from "react-redux";
 import CourseCard from "../CourseCard/CourseCard";
+import PropTypes from "prop-types";
+import React from "react";
 
-function Cards(props) {
+function Cards() {
+  const courses = useSelector((state) => state.courseReducer.courses);
+  const authors = useSelector((state) => state.authorReducer.authors);
+
   function searchAuthor(course) {
-    return props.authors
+    return authors
       .filter((author) => course.authors.includes(author.id))
       .map((author) => author.name)
       .join(", ");
   }
 
-  const filtered = props.filteredCourses.map((course) => (
-    <CourseCard course={course} author={searchAuthor(course)} />
-  ));
-
-  return <>{filtered}</>;
+  return (
+    <>
+      {courses.map((course) => (
+        <CourseCard course={course} author={searchAuthor(course)} />
+      ))}
+    </>
+  );
 }
 
 Cards.propTypes = {

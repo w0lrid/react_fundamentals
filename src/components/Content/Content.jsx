@@ -31,10 +31,7 @@ function Content(props) {
         </Link>
       </div>
       <div className={styles.cardsContainer}>
-        <Cards
-          filteredCourses={filteredCourses}
-          authors={Data.mockedAuthorsList}
-        />
+        <Cards />
       </div>
     </>
   );

@@ -3,11 +3,14 @@ import { Link, useHistory } from "react-router-dom";
 
 import Input from "../Input/Input";
 import Button from "../Button/Button";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../store/slices/userSlice";
 
 function Login() {
   const [pass, setPass] = useState("");
   const [mail, setMail] = useState("");
   const history = useHistory();
+  const dispatch = useDispatch();
 
   function createDB() {
     let db;
@@ -37,9 +40,9 @@ function Login() {
     const req = registeredUsers.get(mail);
     req.onsuccess = (event) => {
       let user = event.target.result;
-
       if (user) {
         if (user.password === pass) {
+          dispatch(loginUser(user));
           history.push("/courses");
         } else console.log("incorrect pass");
       } else {
