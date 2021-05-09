@@ -1,21 +1,22 @@
+import React from "react";
+import styles from "./Header.module.css";
+
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
+import { useSelector } from "react-redux";
 
-function Header() {
+function Header(props) {
+  const name = useSelector((state) => state.userReducer.user.name);
   return (
-    <div className="container border border-danger rounded mb-4 p-4">
-      <div className="row">
-        <div className="col-8">
-          <Logo />
-        </div>
-        <div className="col">
-          <h1>Dmitrii</h1>
-        </div>
-        <div className="col align-self-center">
-          <Button text="Logout" />
-        </div>
+    <header>
+      <div className={styles.logo}>
+        <Logo />
       </div>
-    </div>
+      <div className={styles.name}>
+        <h1>{name}</h1>
+      </div>
+      <Button text="Logout" />
+    </header>
   );
 }
 

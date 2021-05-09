@@ -1,0 +1,20 @@
+.searchContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.searchBar {
+  display: flex;
+  margin-right: auto;
+}
+
+.addNewCourseButton {
+  margin-left: 100px;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+}

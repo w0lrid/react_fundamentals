@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+}
+
+.link {
+  text-decoration: none;
+}
+.title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 20px 0 20px 0;
+}
+
+.description {
+  width: 70%;
+  margin-right: 10px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  padding-left: 10px;
+}
