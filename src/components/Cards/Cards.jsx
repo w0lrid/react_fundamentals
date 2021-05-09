@@ -3,8 +3,8 @@ import CourseCard from "../CourseCard/CourseCard";
 import PropTypes from "prop-types";
 import React from "react";
 
-function Cards() {
-  const courses = useSelector((state) => state.courseReducer.courses);
+function Cards({ courses }) {
+  // const courses = useSelector((state) => state.courseReducer.courses);
   const authors = useSelector((state) => state.authorReducer.authors);
 
   function searchAuthor(course) {
@@ -16,9 +16,9 @@ function Cards() {
 
   return (
     <>
-      {courses.map((course) => (
-        <CourseCard course={course} author={searchAuthor(course)} />
-      ))}
+      {courses.map((course) => {
+        return <CourseCard course={course} author={searchAuthor(course)} />;
+      })}
     </>
   );
 }

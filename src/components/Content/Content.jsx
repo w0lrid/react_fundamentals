@@ -6,12 +6,12 @@ import styles from "./Content.module.css";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import Cards from "../Cards/Cards";
-import Data from "../../data.json";
+import { useSelector } from "react-redux";
 
 function Content(props) {
+  const courses = useSelector((state) => state.courseReducer.courses);
   const [courseName, setCourseName] = useState("");
-
-  const filteredCourses = Data.mockedCourseList.filter((course) =>
+  const filteredCourses = courses.filter((course) =>
     course.title.toLowerCase().includes(courseName.toLowerCase())
   );
 
@@ -31,7 +31,7 @@ function Content(props) {
         </Link>
       </div>
       <div className={styles.cardsContainer}>
-        <Cards />
+        <Cards courses={filteredCourses} />
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 import { combineReducers, createStore } from "redux";
 import userReducer from "./slices/userSlice";
 import courseReducer from "./slices/courseSlice";
-import authorReducer from "./authors/reducer";
+import authorReducer from "./slices/authorSlice";
 
 const rootReducer = combineReducers({
   userReducer,

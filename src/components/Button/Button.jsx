@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./Button.module.css";
 
-function Button(props) {
+function Button(props, { type }) {
   return (
-    <button type="button" onClick={props.onClick}>
+    <button type={type} onClick={props.onClick}>
       {props.text}
     </button>
   );

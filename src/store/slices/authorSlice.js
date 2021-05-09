@@ -1,3 +1,5 @@
+import { createSlice } from "@reduxjs/toolkit";
+
 const initialState = {
   authors: [
     {
@@ -19,8 +21,18 @@ const initialState = {
   ],
 };
 
-function authorReducer(state = initialState, action) {
-  return state;
-}
+const authorSlice = createSlice({
+  name: "author",
+  initialState,
+  reducers: {
+    createAuthor(state, action) {
+      debugger;
+      console.log(action.payload);
+      state.authors.push(action.payload);
+    },
+  },
+});
 
-export default authorReducer;
+export const { createAuthor } = authorSlice.actions;
+
+export default authorSlice.reducer;
