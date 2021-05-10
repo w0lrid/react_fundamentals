@@ -37,11 +37,6 @@ function Registration() {
         placeholder={`Enter password`}
         onChange={(event) => setPass(event.target.value)}
       />
-      {/*       <div>
-        <Link to="/login">
-          <Button text="Register" onClick={createDB} />
-        </Link>
-      </div> */}
       <div>
         <Link to="/login">
           <Button text="Register" onClick={register} />
