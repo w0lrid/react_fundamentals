@@ -26,8 +26,6 @@ const authorSlice = createSlice({
   initialState,
   reducers: {
     createAuthor(state, action) {
-      debugger;
-      console.log(action.payload);
       state.authors.push(action.payload);
     },
   },

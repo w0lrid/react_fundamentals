@@ -5,7 +5,7 @@ import styles from "./CourseCard.module.css";
 import Button from "../Button/Button";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { deleteCourse } from "../../store/slices/courseSlice";
+import { showCourse, deleteCourse } from "../../store/slices/courseSlice";
 
 function CourseCard(props) {
   const dispatch = useDispatch();
@@ -31,7 +31,10 @@ function CourseCard(props) {
         </div>
         <div className={styles.button}>
           <Link to={`/courses/${props.course.title}`}>
-            <Button text="Show course" />
+            <Button
+              text="Show course"
+              onClick={() => dispatch(showCourse({ id: props.course.id }))}
+            />
           </Link>
         </div>
         <div className={styles.button}>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import Button from "../Button/Button";
 import Input from "../Input/Input";
@@ -9,6 +9,7 @@ function Registration() {
   const [nameReg, setName] = useState("");
   const [passwordReg, setPass] = useState("");
   const [emailReg, setMail] = useState("");
+  const history = useHistory();
 
   const register = () => {
     axios
@@ -17,7 +18,13 @@ function Registration() {
         email: emailReg,
         password: passwordReg,
       })
-      .then((response) => console.log(response));
+      .then((response) => {
+        if (response.status === 201) history.push("/login");
+      })
+      .catch((error) => {
+        history.push("/registration");
+        console.log(error.message);
+      });
   };
 
   return (

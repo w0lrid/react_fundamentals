@@ -20,8 +20,9 @@ function Login() {
         password: passwordLog,
       })
       .then((response) => {
+        localStorage.setItem("Token", response.data.result);
         history.push("/courses");
-        dispatch(loginUser(response.data.user));
+        dispatch(loginUser(response.data));
       })
       .catch((error) => alert("Invalid data."));
   };
