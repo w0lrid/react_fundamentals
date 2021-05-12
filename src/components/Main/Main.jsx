@@ -8,6 +8,7 @@ import Registration from "../Registration/Registration";
 import Content from "../Content/Content";
 import CourseInfo from "../CourseInfo/CourseInfo";
 import NewCourseForm from "../NewCourseForm/NewCourseForm";
+import UpdateCourse from "../UpdateCourse/UpdateCourse";
 
 function Main() {
   return (
@@ -16,7 +17,8 @@ function Main() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/registration" component={Registration} />
         <Route exact path="/courses" component={Content} />
-        <Route path="/courses/add" component={NewCourseForm} />
+        <Route exact path="/courses/add" component={NewCourseForm} />
+        <Route path="/courses/update/:title" component={UpdateCourse} />
         <Route path="/courses/:title" component={CourseInfo} />
         <Switch>
           <Route

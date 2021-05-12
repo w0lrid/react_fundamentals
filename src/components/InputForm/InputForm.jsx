@@ -1,10 +1,10 @@
 import React from "react";
 
-function InputForm({ label, register, required }) {
+function InputForm({ placeholder, label, register, required }) {
   return (
     <>
       <label>{label}</label>
-      <input {...register(label, { required })} />
+      <input defaultValue={placeholder} {...register(label, { required })} />
     </>
   );
 }

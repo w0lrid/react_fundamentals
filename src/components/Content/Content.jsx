@@ -7,7 +7,7 @@ import styles from "./Content.module.css";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import Cards from "../Cards/Cards";
-import { getCourses } from "../../store/slices/courseSlice";
+import { clear, getCourses } from "../../store/slices/courseSlice";
 
 function Content() {
   const courses = useSelector((state) => state.courseReducer.courses);
@@ -23,6 +23,7 @@ function Content() {
   const dispatch = useDispatch();
   useEffect(() => {
     if (status === "idle") dispatch(getCourses());
+    dispatch(clear());
   }, []);
 
   return (
