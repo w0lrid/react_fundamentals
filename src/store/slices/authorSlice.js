@@ -1,6 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
-const initialState = {
+/* const initialState = {
   authors: [
     {
       id: "27cc3006-e93a-4748-8ca8-73d06aa93b6d",
@@ -20,6 +21,14 @@ const initialState = {
     },
   ],
 };
+ */
+const initialState = { status: "idle", error: null, authors: [] };
+
+export const getAuthors = createAsyncThunk("author/getAuthors", () =>
+  axios
+    .get("http://localhost:3000/authors/all")
+    .then((response) => response.data.result)
+);
 
 const authorSlice = createSlice({
   name: "author",
@@ -27,6 +36,19 @@ const authorSlice = createSlice({
   reducers: {
     createAuthor(state, action) {
       state.authors.push(action.payload);
+    },
+  },
+  extraReducers: {
+    [getAuthors.pending]: (state) => {
+      state.status = "loading";
+    },
+    [getAuthors.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.authors = state.authors.concat(action.payload);
+    },
+    [getAuthors.rejected]: (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message;
     },
   },
 });
