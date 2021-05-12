@@ -9,8 +9,6 @@ import { useHistory } from "react-router";
 
 function Header() {
   const history = useHistory();
-  const token = useSelector((state) => state.userReducer.user.isAuth);
-  const email = useSelector((state) => state.userReducer.user.email);
   const name = useSelector((state) => state.userReducer.user.name);
   const dispatch = useDispatch();
 
@@ -34,7 +32,10 @@ function Header() {
       <div className={styles.name}>
         <h1>{name}</h1>
       </div>
-      {logoutButton(token && email)}
+      {logoutButton(
+        localStorage.getItem("Email") === "admin@email.com" &&
+          localStorage.getItem("Token")
+      )}
     </header>
   );
 }

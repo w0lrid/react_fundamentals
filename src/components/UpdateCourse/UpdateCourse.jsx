@@ -70,13 +70,6 @@ function UpdateCourse() {
         register={register}
         required
       />
-      {/*       </>
-    );
-  });
-  return (
-    <>
-      {element} */}
-
       <h2>Authors</h2>
       {authors.map((author) => (
         <div>

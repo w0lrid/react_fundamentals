@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 } from "uuid";
 import { Link } from "react-router-dom";
 import Data from "../../data.json";
 import styles from "./CourseInfo.module.css";
@@ -6,11 +7,11 @@ import additionalStyles from "../CourseCard/CourseCard.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { clear } from "../../store/slices/courseSlice";
 
-function CourseInfo(props) {
+function CourseInfo() {
   const dispatch = useDispatch();
   const course = useSelector((state) => state.courseReducer.course).map(
     (item) => (
-      <>
+      <div key={v4()}>
         <Link to="/courses">
           <div className={styles.link} onClick={() => dispatch(clear())}>
             &lt;&lt;&lt; back to courses
@@ -47,7 +48,7 @@ function CourseInfo(props) {
             </div>
           </div>
         </div>
-      </>
+      </div>
     )
   );
   return <>{course}</>;

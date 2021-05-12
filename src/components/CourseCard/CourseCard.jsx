@@ -4,11 +4,10 @@ import styles from "./CourseCard.module.css";
 
 import Button from "../Button/Button";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { choose, deleteCourse } from "../../store/slices/courseSlice";
 
 function CourseCard(props) {
-  const email = useSelector((state) => state.userReducer.user.email);
   const dispatch = useDispatch();
 
   return (
@@ -38,7 +37,8 @@ function CourseCard(props) {
             />
           </Link>
         </div>
-        {email === "admin@email.com" ? (
+        {localStorage.getItem("Email") === "admin@email.com" &&
+        localStorage.getItem("Token") ? (
           <div className={styles.button}>
             <Link to={`/courses/update/${props.course.title}`}>
               <Button

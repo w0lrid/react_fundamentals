@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { v4 } from "uuid";
 import CourseCard from "../CourseCard/CourseCard";
 import PropTypes from "prop-types";
 import React from "react";
@@ -17,7 +18,13 @@ function Cards({ courses }) {
   return (
     <>
       {courses.map((course) => {
-        return <CourseCard course={course} author={searchAuthor(course)} />;
+        return (
+          <CourseCard
+            key={v4()}
+            course={course}
+            author={searchAuthor(course)}
+          />
+        );
       })}
     </>
   );
