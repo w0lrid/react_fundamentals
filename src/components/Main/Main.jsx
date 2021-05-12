@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 
 import styles from "./Main.module.css";
 
@@ -11,6 +11,11 @@ import NewCourseForm from "../NewCourseForm/NewCourseForm";
 import UpdateCourse from "../UpdateCourse/UpdateCourse";
 
 function Main() {
+  const history = useHistory();
+  const isLogged = !!(
+    localStorage.getItem("Token") && localStorage.getItem("Email")
+  );
+  if (!isLogged) history.push("/login");
   return (
     <div className={styles.container}>
       <Switch>

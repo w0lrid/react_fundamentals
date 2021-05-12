@@ -21,6 +21,7 @@ function Login() {
       })
       .then((response) => {
         localStorage.setItem("Token", response.data.result);
+        localStorage.setItem("Email", response.data.user.email);
         history.push("/courses");
         dispatch(loginUser(response.data));
       })
