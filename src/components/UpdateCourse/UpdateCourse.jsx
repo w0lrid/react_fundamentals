@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
 import { createAuthor } from "../../store/slices/authorSlice";
-import { clear, updateCourse } from "../../store/slices/courseSlice";
+import { updateCourse } from "../../store/slices/courseSlice";
 import InputForm from "../InputForm/InputForm";
 import Button from "../Button/Button";
 
@@ -26,7 +26,9 @@ function UpdateCourse() {
         description: data.description,
         duration:
           data.duration === course.duration ? course.duration : data.duration,
-        authors: courseAuthors,
+        authors: course.authors.concat(
+          courseAuthors.map((author) => author.id)
+        ),
       })
     );
     history.push("/courses");
@@ -43,6 +45,13 @@ function UpdateCourse() {
     setCourseAuthors([...courseAuthors, author]);
   };
   const authorId = (Math.random() / 100).toString();
+
+  function searchAuthor(course) {
+    return authors
+      .filter((author) => course.authors.includes(author.id))
+      .map((author) => <div>{author.name}</div>);
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit(update)}>
@@ -76,14 +85,17 @@ function UpdateCourse() {
           {author.name}{" "}
           <Button
             onClick={() => {
-              addAuthor(author.id);
+              addAuthor(author);
             }}
             text="Add author"
           />
         </div>
       ))}
       <h2>Course authors</h2>
-      {courseAuthors.map((author) => author)}
+      {searchAuthor(course)}
+      {courseAuthors.map((author) => (
+        <div>{author.name}</div>
+      ))}
     </>
   );
 }

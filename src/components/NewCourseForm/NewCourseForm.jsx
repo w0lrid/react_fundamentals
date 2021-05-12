@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { v4 } from "uuid";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
@@ -26,7 +25,7 @@ function NewCourseForm(props) {
         description: data.description,
         creationDate: date,
         duration: data.duration / 60,
-        authors: courseAuthors,
+        authors: courseAuthors.map((author) => author.id),
       })
     );
     history.push("/courses");
@@ -34,8 +33,8 @@ function NewCourseForm(props) {
   const createNewAuthor = (data) => {
     dispatch(
       createAuthor({
-        id: authorId,
         name: data.name,
+        id: authorId,
       })
     );
   };
@@ -68,14 +67,16 @@ function NewCourseForm(props) {
           {author.name}{" "}
           <Button
             onClick={() => {
-              addAuthor(author.id);
+              addAuthor(author);
             }}
             text="Add author"
           />
         </div>
       ))}
       <h2>Course authors</h2>
-      {courseAuthors.map((author) => author)}
+      {courseAuthors.map((author) => (
+        <div>{author.name}</div>
+      ))}
     </>
   );
 }
