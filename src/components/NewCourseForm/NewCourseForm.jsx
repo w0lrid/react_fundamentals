@@ -35,7 +35,6 @@ function NewCourseForm(props) {
     dispatch(
       createAuthor({
         name: data.name,
-        id: authorId,
       })
     );
   };
@@ -44,7 +43,6 @@ function NewCourseForm(props) {
   };
 
   const courseId = (Math.random() * 100).toString();
-  const authorId = (Math.random() / 100).toString();
   const today = new Date();
   const date =
     today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();

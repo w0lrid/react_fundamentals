@@ -26,7 +26,9 @@ function UpdateCourse() {
         creationDate: course.date,
         description: data.description,
         duration:
-          data.duration === course.duration ? course.duration : data.duration,
+          data.duration === course.duration
+            ? Number.parseInt(course.duration)
+            : Number.parseInt(data.duration / 60),
         authors: course.authors.concat(
           courseAuthors.map((author) => author.id)
         ),
@@ -37,7 +39,6 @@ function UpdateCourse() {
   const createNewAuthor = (data) => {
     dispatch(
       createAuthor({
-        id: authorId,
         name: data.name,
       })
     );
@@ -45,7 +46,6 @@ function UpdateCourse() {
   const addAuthor = (author) => {
     setCourseAuthors([...courseAuthors, author]);
   };
-  const authorId = (Math.random() / 100).toString();
 
   function searchAuthor(course) {
     return authors

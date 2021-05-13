@@ -20,6 +20,7 @@ function Login() {
         password: passwordLog,
       })
       .then((response) => {
+        console.log(response.data.result);
         localStorage.setItem("Token", response.data.result);
         localStorage.setItem("Email", response.data.user.email);
         history.push("/courses");

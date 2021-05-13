@@ -30,11 +30,21 @@ export const getAuthors = createAsyncThunk("author/getAuthors", () =>
     .then((response) => response.data.result)
 );
 
+const headers = {
+  "Content-Type": "application/json",
+  Authorization: localStorage.getItem("Token"),
+};
+
 const authorSlice = createSlice({
   name: "author",
   initialState,
   reducers: {
     createAuthor(state, action) {
+      axios
+        .post("http://localhost:3000/authors/add", action.payload, {
+          headers: headers,
+        })
+        .then((response) => console.log(response));
       state.authors.push(action.payload);
     },
   },

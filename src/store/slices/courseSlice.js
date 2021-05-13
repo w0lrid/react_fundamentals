@@ -9,14 +9,29 @@ export const getCourses = createAsyncThunk("course/getCourses", () =>
     .then((response) => response.data.result)
 );
 
+const headers = {
+  "Content-Type": "application/json",
+  Authorization: localStorage.getItem("Token"),
+};
+
 const courseSlice = createSlice({
   name: "courses",
   initialState,
   reducers: {
     addCourse(state, action) {
+      axios
+        .post("http://localhost:3000/courses/add", action.payload, {
+          headers: headers,
+        })
+        .then((response) => console.log(response));
       state.courses = state.courses.concat(action.payload);
     },
     updateCourse(state, action) {
+      axios.put(
+        `http://localhost:3000/courses/${action.payload.id}`,
+        action.payload,
+        { headers: headers }
+      );
       const index = state.courses.findIndex(
         (course) => course.id === action.payload.id
       );
@@ -28,6 +43,9 @@ const courseSlice = createSlice({
       );
     },
     deleteCourse(state, action) {
+      axios.delete(`http://localhost:3000/courses/${action.payload.id}`, {
+        headers: headers,
+      });
       state.courses = state.courses.filter(
         (course) => course.id !== action.payload.id
       );
