@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
+import styles from "./NewCourseForm.module.css";
 
 import Button from "../Button/Button";
 import { useDispatch, useSelector } from "react-redux";
@@ -50,33 +51,38 @@ function NewCourseForm(props) {
 
   return (
     <>
-      <form onSubmit={handleSubmit(createCourse)}>
-        <InputForm label="title" register={register} required />
-        <InputForm label="description" register={register} required />
-        <Button type="submit" text="click me" />
-      </form>
-      <form onSubmit={handleSubmit2(createNewAuthor)}>
-        <InputForm label="name" register={register2} />
-        <Button type="submit" text="Create author" />
-      </form>
-      <InputForm label="duration" register={register} required />
-
-      <h2>Authors</h2>
-      {authors.map((author) => (
-        <div>
-          {author.name}{" "}
-          <Button
-            onClick={() => {
-              addAuthor(author);
-            }}
-            text="Add author"
-          />
+      <div className={styles.infoContainer}>
+        <form onSubmit={handleSubmit(createCourse)} className={styles.form}>
+          <InputForm label="title" register={register} required />
+          <InputForm label="description" register={register} required />
+          <Button type="submit" text="Create course" />
+        </form>
+        <form onSubmit={handleSubmit2(createNewAuthor)} className={styles.form}>
+          <InputForm label="name" register={register2} />
+          <Button type="submit" text="Create author" />
+        </form>
+        <div className={styles.form}>
+          <InputForm label="duration" register={register} required />
         </div>
-      ))}
-      <h2>Course authors</h2>
-      {courseAuthors.map((author) => (
-        <div>{author.name}</div>
-      ))}
+      </div>
+      <div className={styles.authorContainer}>
+        <h2>Authors</h2>
+        {authors.map((author) => (
+          <div>
+            {author.name}{" "}
+            <Button
+              onClick={() => {
+                addAuthor(author);
+              }}
+              text="Add author"
+            />
+          </div>
+        ))}
+        <h2>Course authors</h2>
+        {courseAuthors.map((author) => (
+          <div>{author.name}</div>
+        ))}
+      </div>
     </>
   );
 }

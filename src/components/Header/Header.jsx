@@ -33,8 +33,7 @@ function Header() {
         <h1>{name}</h1>
       </div>
       {logoutButton(
-        localStorage.getItem("Email") === "admin@email.com" &&
-          localStorage.getItem("Token")
+        localStorage.getItem("Email") && localStorage.getItem("Token")
       )}
     </header>
   );
