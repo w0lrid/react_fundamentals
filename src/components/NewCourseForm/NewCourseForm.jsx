@@ -6,7 +6,7 @@ import styles from "./NewCourseForm.module.css";
 
 import Button from "../Button/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { addCourse } from "../../store/slices/courseSlice";
+import { sendCourse } from "../../store/actions/courseActions";
 import { createAuthor } from "../../store/slices/authorSlice";
 import InputForm from "../InputForm/InputForm";
 
@@ -20,11 +20,9 @@ function NewCourseForm(props) {
   const { register: register2, handleSubmit: handleSubmit2 } = useForm();
   const createCourse = (data) => {
     dispatch(
-      addCourse({
-        id: courseId,
+      sendCourse({
         title: data.title,
         description: data.description,
-        creationDate: date,
         duration: data.duration / 60,
         authors: courseAuthors.map((author) => author.id),
       })
@@ -41,11 +39,6 @@ function NewCourseForm(props) {
   const addAuthor = (author) => {
     setCourseAuthors([...courseAuthors, author]);
   };
-
-  const courseId = (Math.random() * 100).toString();
-  const today = new Date();
-  const date =
-    today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
 
   return (
     <>

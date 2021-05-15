@@ -10,7 +10,7 @@ import axios from "axios";
 
 function Header() {
   const history = useHistory();
-  const name = useSelector((state) => state.userReducer.user.name);
+  // const name = useSelector((state) => state.userReducer.user.name);
   const dispatch = useDispatch();
 
   const headers = {
@@ -35,16 +35,14 @@ function Header() {
   const logoutButton = (condition) =>
     condition ? <Button text="Logout" onClick={logout} /> : "";
 
-  useEffect(() => logoutButton(name), []);
+  // useEffect(() => logoutButton(name), []);
 
   return (
     <header>
       <div className={styles.logo}>
         <Logo />
       </div>
-      <div className={styles.name}>
-        <h1>{name}</h1>
-      </div>
+      <div className={styles.name}>{/* <h1>{name}</h1> */}</div>
       {logoutButton(
         localStorage.getItem("Email") && localStorage.getItem("Token")
       )}

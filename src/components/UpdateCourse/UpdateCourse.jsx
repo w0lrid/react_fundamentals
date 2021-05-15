@@ -1,16 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import styles from "./UpdateCourse.module.css";
 
 import { createAuthor } from "../../store/slices/authorSlice";
-import { updateCourse } from "../../store/slices/courseSlice";
+import { updateCourse } from "../../store/actions/courseActions";
 import InputForm from "../InputForm/InputForm";
 import Button from "../Button/Button";
+import axios from "axios";
 
 function UpdateCourse() {
-  const [course] = useSelector((state) => state.courseReducer.course);
+  // const course = useSelector((state) => state.courseReducer.courses);
+  const [course, setCourse] = useState({});
+  const location = useLocation();
+
+  useEffect(() => {
+    const fetchData = async (id = location.state.id) => {
+      const response = await axios.get(`http://localhost:3000/courses/${id}`);
+
+      setCourse(response.data.result);
+    };
+    fetchData();
+  }, []);
+
   const authors = useSelector((state) => state.authorReducer.authors);
   const [courseAuthors, setCourseAuthors] = useState([]);
 
@@ -23,15 +36,15 @@ function UpdateCourse() {
       updateCourse({
         id: course.id,
         title: data.title,
-        creationDate: course.date,
         description: data.description,
         duration:
           data.duration === course.duration
             ? Number.parseInt(course.duration)
             : Number.parseInt(data.duration / 60),
-        authors: course.authors.concat(
+        /*         authors: course.authors.concat(
           courseAuthors.map((author) => author.id)
-        ),
+        ), */
+        authors: courseAuthors.map((author) => author.id),
       })
     );
     history.push("/courses");
@@ -47,11 +60,11 @@ function UpdateCourse() {
     setCourseAuthors([...courseAuthors, author]);
   };
 
-  function searchAuthor(course) {
+  /*   function searchAuthor(course) {
     return authors
       .filter((author) => course.authors.includes(author.id))
       .map((author) => <div>{author.name}</div>);
-  }
+  } */
 
   return (
     <>
@@ -98,7 +111,7 @@ function UpdateCourse() {
           </div>
         ))}
         <h2>Course authors</h2>
-        {searchAuthor(course)}
+        {/* {searchAuthor(course)} */}
         {courseAuthors.map((author) => (
           <div>{author.name}</div>
         ))}

@@ -3,14 +3,14 @@ import { v4 } from "uuid";
 import CourseCard from "../CourseCard/CourseCard";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
-import { getAuthors } from "../../store/slices/authorSlice";
+import { getAuthors } from "../../store/actions/authorActions";
 
 function Cards({ courses }) {
   const authors = useSelector((state) => state.authorReducer.authors);
   const status = useSelector((state) => state.authorReducer.status);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (status === "idle") dispatch(getAuthors());
+    if (status === false) dispatch(getAuthors());
   });
 
   function searchAuthor(course) {
