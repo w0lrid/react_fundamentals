@@ -11,7 +11,6 @@ import Button from "../Button/Button";
 import axios from "axios";
 
 function UpdateCourse() {
-  // const course = useSelector((state) => state.courseReducer.courses);
   const [course, setCourse] = useState({});
   const location = useLocation();
 

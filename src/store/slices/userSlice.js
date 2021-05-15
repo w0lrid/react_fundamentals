@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+/* import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  user: { isAuth: "", name: "", email: "" },
+  user: { token: "", name: "", email: "" },
 };
 
 const userSlice = createSlice({
@@ -11,7 +11,7 @@ const userSlice = createSlice({
   reducers: {
     loginUser(state, action) {
       state.user = {
-        isAuth: action.payload.result,
+        token: action.payload.result,
         name: action.payload.user.name,
         email: action.payload.user.email,
       };
@@ -25,3 +25,4 @@ const userSlice = createSlice({
 export const { loginUser, logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;
+ */

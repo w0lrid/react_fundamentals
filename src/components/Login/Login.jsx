@@ -1,53 +1,53 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import Input from "../Input/Input";
 import Button from "../Button/Button";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../../store/slices/userSlice";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../store/actions/userActions";
 
 function Login() {
   const [passwordLog, setPass] = useState("");
   const [mailLog, setMail] = useState("");
-  const history = useHistory();
   const dispatch = useDispatch();
 
-  const login = () => {
-    axios
-      .post("http://localhost:3000/login", {
-        email: mailLog,
-        password: passwordLog,
-      })
-      .then((response) => {
-        console.log(response.data.result);
-        localStorage.setItem("Token", response.data.result);
-        localStorage.setItem("Email", response.data.user.email);
-        history.push("/courses");
-        dispatch(loginUser(response.data));
-      })
-      .catch((error) => alert("Invalid data."));
+  const user = {
+    email: mailLog,
+    password: passwordLog,
   };
+
+  const isAuth = useSelector((state) => state.userReducer.isAuth);
 
   return (
     <div>
-      <div>Email</div>
-      <Input
-        placeholder={`Enter email`}
-        onChange={(event) => setMail(event.target.value)}
-      />
-      <div>Password</div>
-      <Input
-        placeholder={`Enter password`}
-        onChange={(event) => setPass(event.target.value)}
-      />
-      <div>
-        <Button text="Login" onClick={login} />
-      </div>
-      <div>
-        If you don't have an account you can{" "}
-        <Link to="/registration">Registration</Link>
-      </div>
+      {isAuth ? (
+        <Redirect push to="/courses" />
+      ) : (
+        <>
+          <div>Email</div>
+          <Input
+            placeholder={`Enter email`}
+            onChange={(event) => setMail(event.target.value)}
+          />
+          <div>Password</div>
+          <Input
+            placeholder={`Enter password`}
+            onChange={(event) => setPass(event.target.value)}
+          />
+          <div>
+            <Button
+              text="Login"
+              onClick={() => {
+                dispatch(loginUser(user));
+              }}
+            />
+          </div>
+          <div>
+            If you don't have an account you can{" "}
+            <Link to="/registration">Registration</Link>
+          </div>
+        </>
+      )}
     </div>
   );
 }
