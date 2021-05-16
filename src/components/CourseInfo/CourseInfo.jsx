@@ -45,13 +45,7 @@ function CourseInfo() {
           </div>
           <div>
             <span className={additionalStyles.subtitle}>Authors: </span>
-            <span className={additionalStyles.subinfo}>
-              {/* ДОБАВИТЬ ОБРАБОТКУ АВТОРОВ */}
-              {/*               {Data.mockedAuthorsList
-                .filter((author) => course.authors.includes(author.id))
-                .map((author) => author.name)
-                .join(", ")} */}
-            </span>
+            <span className={additionalStyles.subinfo}></span>
           </div>
         </div>
       </div>

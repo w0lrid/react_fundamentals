@@ -1,5 +1,10 @@
 import axios from "axios";
-import { setAuthors } from "../reducers/authorReducer";
+import { createAuthor, setAuthors } from "../reducers/authorReducer";
+
+const headers = {
+  "Content-Type": "application/json",
+  Authorization: localStorage.getItem("Token"),
+};
 
 export const getAuthors = () => {
   return async (dispatch) => {
@@ -9,13 +14,13 @@ export const getAuthors = () => {
   };
 };
 
-/* export const getAuthors = createAsyncThunk("author/getAuthors", () =>
-  axios
-    .get("http://localhost:3000/authors/all")
-    .then((response) => response.data.result)
-);
-
-const headers = {
-  "Content-Type": "application/json",
-  Authorization: localStorage.getItem("Token"),
-}; */
+export const createAuthorAction = (author) => {
+  return (dispatch) => {
+    debugger;
+    axios
+      .post("http://localhost:3000/authors/add", author, {
+        headers: headers,
+      })
+      .then((response) => dispatch(createAuthor(response.data)));
+  };
+};

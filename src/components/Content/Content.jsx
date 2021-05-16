@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Content.module.css";
@@ -10,6 +10,7 @@ import Cards from "../Cards/Cards";
 import { getCourses } from "../../store/actions/courseActions";
 
 function Content() {
+  const history = useHistory();
   const courses = useSelector((state) => state.courseReducer.courses);
   const status = useSelector((state) => state.courseReducer.status);
   const [courseName, setCourseName] = useState("");
@@ -32,9 +33,15 @@ function Content() {
           <Input placeholder="Enter course name..." />
           <Button onClick={handleChangeForButton} text="Search" />
         </div>
-        <Link to="/courses/add">
-          <Button text="Add new course" />
-        </Link>
+        {localStorage.getItem("Email") === "admin@email.com" &&
+        localStorage.getItem("Token") ? (
+          <Button
+            text="Add new course"
+            onClick={() => history.push("/courses/add")}
+          />
+        ) : (
+          ""
+        )}
       </div>
       <div className={styles.cardsContainer}>
         <Cards courses={filteredCourses} />

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router";
 import styles from "./UpdateCourse.module.css";
 
-import { createAuthor } from "../../store/slices/authorSlice";
+import { createAuthorAction } from "../../store/actions/authorActions";
 import { updateCourse } from "../../store/actions/courseActions";
 import InputForm from "../InputForm/InputForm";
 import Button from "../Button/Button";
@@ -40,17 +40,16 @@ function UpdateCourse() {
           data.duration === course.duration
             ? Number.parseInt(course.duration)
             : Number.parseInt(data.duration / 60),
-        /*         authors: course.authors.concat(
+        authors: course.authors.concat(
           courseAuthors.map((author) => author.id)
-        ), */
-        authors: courseAuthors.map((author) => author.id),
+        ),
       })
     );
     history.push("/courses");
   };
   const createNewAuthor = (data) => {
     dispatch(
-      createAuthor({
+      createAuthorAction({
         name: data.name,
       })
     );
@@ -58,12 +57,6 @@ function UpdateCourse() {
   const addAuthor = (author) => {
     setCourseAuthors([...courseAuthors, author]);
   };
-
-  /*   function searchAuthor(course) {
-    return authors
-      .filter((author) => course.authors.includes(author.id))
-      .map((author) => <div>{author.name}</div>);
-  } */
 
   return (
     <>
@@ -110,7 +103,6 @@ function UpdateCourse() {
           </div>
         ))}
         <h2>Course authors</h2>
-        {/* {searchAuthor(course)} */}
         {courseAuthors.map((author) => (
           <div>{author.name}</div>
         ))}

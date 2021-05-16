@@ -43,7 +43,6 @@ function CourseCard(props) {
         {localStorage.getItem("Email") === "admin@email.com" &&
         localStorage.getItem("Token") ? (
           <div className={styles.button}>
-            {/* <Link to={`/courses/update/${props.course.title}`}> */}
             <Button
               text="Update course"
               onClick={() => {
@@ -53,7 +52,6 @@ function CourseCard(props) {
                 });
               }}
             />
-            {/* </Link> */}
             <Button
               text="Delete course"
               onClick={() => dispatch(deleteCourse({ id: props.course.id }))}

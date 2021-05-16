@@ -7,10 +7,10 @@ import styles from "./NewCourseForm.module.css";
 import Button from "../Button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { sendCourse } from "../../store/actions/courseActions";
-import { createAuthor } from "../../store/slices/authorSlice";
+import { createAuthorAction } from "../../store/actions/authorActions";
 import InputForm from "../InputForm/InputForm";
 
-function NewCourseForm(props) {
+function NewCourseForm() {
   const authors = useSelector((state) => state.authorReducer.authors);
   const [courseAuthors, setCourseAuthors] = useState([]);
 
@@ -31,7 +31,7 @@ function NewCourseForm(props) {
   };
   const createNewAuthor = (data) => {
     dispatch(
-      createAuthor({
+      createAuthorAction({
         name: data.name,
       })
     );
