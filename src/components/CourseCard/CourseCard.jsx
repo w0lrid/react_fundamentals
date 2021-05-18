@@ -13,8 +13,10 @@ function CourseCard(props) {
   return (
     <div className={styles.container}>
       <div className={styles.description}>
-        <h2 className={styles.title}>{props.course.title}</h2>
-        <p>{props.course.description}</p>
+        <h2 data-testid="title" className={styles.title}>
+          {props.course.title}
+        </h2>
+        <p data-testid="description">{props.course.description}</p>
       </div>
       <div className={styles.info}>
         <div>
@@ -23,11 +25,15 @@ function CourseCard(props) {
         </div>
         <div>
           <span className={styles.subtitle}>Creation date: </span>
-          <span className={styles.subinfo}>{props.course.creationDate}</span>
+          <span data-testid="date" className={styles.subinfo}>
+            {props.course.creationDate}
+          </span>
         </div>
         <div>
           <span className={styles.subtitle}>Duration: </span>
-          <span className={styles.subinfo}>{props.course.duration} hours</span>
+          <span data-testid="duration" className={styles.subinfo}>
+            {props.course.duration} hours
+          </span>
         </div>
         <div className={styles.button}>
           <Button

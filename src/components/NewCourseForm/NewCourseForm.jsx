@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 } from "uuid";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
@@ -42,7 +43,7 @@ function NewCourseForm() {
 
   return (
     <>
-      <div className={styles.infoContainer}>
+      <div data-testid="newcourseform" className={styles.infoContainer}>
         <form onSubmit={handleSubmit(createCourse)} className={styles.form}>
           <InputForm label="title" register={register} required />
           <InputForm label="description" register={register} required />
@@ -59,7 +60,7 @@ function NewCourseForm() {
       <div className={styles.authorContainer}>
         <h2>Authors</h2>
         {authors.map((author) => (
-          <div>
+          <div data-testid="authors" key={v4()}>
             {author.name}{" "}
             <Button
               onClick={() => {

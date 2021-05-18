@@ -21,17 +21,18 @@ function Cards({ courses }) {
   }
 
   return (
-    <>
+    <div data-testid="cards">
       {courses.map((course) => {
         return (
           <CourseCard
+            data-testid="card"
             key={v4()}
             course={course}
             author={searchAuthor(course)}
           />
         );
       })}
-    </>
+    </div>
   );
 }
 
