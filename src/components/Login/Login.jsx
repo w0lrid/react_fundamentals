@@ -1,0 +1,55 @@
+import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
+
+import Input from "../Input/Input";
+import Button from "../Button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../store/actions/userActions";
+
+function Login() {
+  const [passwordLog, setPass] = useState("");
+  const [mailLog, setMail] = useState("");
+  const dispatch = useDispatch();
+
+  const user = {
+    email: mailLog,
+    password: passwordLog,
+  };
+
+  const isAuth = useSelector((state) => state.userReducer.isAuth);
+
+  return (
+    <div>
+      {isAuth ? (
+        <Redirect push to="/courses" />
+      ) : (
+        <>
+          <div>Email</div>
+          <Input
+            placeholder={`Enter email`}
+            onChange={(event) => setMail(event.target.value)}
+          />
+          <div>Password</div>
+          <Input
+            placeholder={`Enter password`}
+            onChange={(event) => setPass(event.target.value)}
+          />
+          <div>
+            <Button
+              text="Login"
+              onClick={() => {
+                dispatch(loginUser(user));
+              }}
+            />
+          </div>
+          <div>
+            If you don't have an account you can{" "}
+            <Link to="/registration">Registration</Link>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+export default Login;

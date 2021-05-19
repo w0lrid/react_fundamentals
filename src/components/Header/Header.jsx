@@ -1,21 +1,44 @@
+import React, { useEffect } from "react";
+import styles from "./Header.module.css";
+
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../../store/actions/userActions";
+import { useHistory } from "react-router";
 
 function Header() {
+  const history = useHistory();
+  const name = useSelector((state) => state.userReducer.name);
+  const dispatch = useDispatch();
+
+  const logoutButton = (condition) =>
+    condition ? (
+      <Button
+        text="Logout"
+        onClick={() => {
+          dispatch(logoutUser());
+          history.push("/login");
+        }}
+      />
+    ) : (
+      ""
+    );
+
+  useEffect(() => logoutButton(name), []);
+
   return (
-    <div className="container border border-danger rounded mb-4 p-4">
-      <div className="row">
-        <div className="col-8">
-          <Logo />
-        </div>
-        <div className="col">
-          <h1>Dmitrii</h1>
-        </div>
-        <div className="col align-self-center">
-          <Button text="Logout" />
-        </div>
+    <header>
+      <div className={styles.logo}>
+        <Logo />
       </div>
-    </div>
+      <div className={styles.name}>
+        <h1>{name}</h1>
+      </div>
+      {logoutButton(
+        localStorage.getItem("Email") && localStorage.getItem("Token")
+      )}
+    </header>
   );
 }
 

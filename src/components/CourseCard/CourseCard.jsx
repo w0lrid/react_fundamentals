@@ -1,27 +1,73 @@
+import React from "react";
+import PropTypes from "prop-types";
+import styles from "./CourseCard.module.css";
+
 import Button from "../Button/Button";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deleteCourse } from "../../store/actions/courseActions";
 
 function CourseCard(props) {
+  const history = useHistory();
+  const dispatch = useDispatch();
   return (
-    <div className="row border border-success rounded mx-auto mb-3 p-3">
-      <div className="col-8">
-        <h2 className="fs-1 fw-bolder">{props.course.title}</h2>
+    <div className={styles.container}>
+      <div className={styles.description}>
+        <h2 className={styles.title}>{props.course.title}</h2>
         <p>{props.course.description}</p>
       </div>
-      <div className="col-4">
-        <span className="fs-5 fw-bolder">Authors: </span>
-        <span className="fs-5">{props.author}</span>
-        <br />
-        <span className="fs-5 fw-bolder">Creation date: </span>
-        <span className="fs-5">{props.course.creationDate}</span>
-        <br />
-        <span className="fs-5 fw-bolder">Duration: </span>
-        <span className="fs-5">{props.course.duration} hours</span>
-        <br />
-        <br />
-        <Button text="Show course" />
+      <div className={styles.info}>
+        <div>
+          <span className={styles.subtitle}>Authors: </span>
+          <span className={styles.subinfo}>{props.author}</span>
+        </div>
+        <div>
+          <span className={styles.subtitle}>Creation date: </span>
+          <span className={styles.subinfo}>{props.course.creationDate}</span>
+        </div>
+        <div>
+          <span className={styles.subtitle}>Duration: </span>
+          <span className={styles.subinfo}>{props.course.duration} hours</span>
+        </div>
+        <div className={styles.button}>
+          <Button
+            text="Show course"
+            onClick={() => {
+              history.push({
+                pathname: `/courses/${props.course.title}`,
+                state: { id: props.course.id },
+              });
+            }}
+          />
+        </div>
+        {localStorage.getItem("Email") === "admin@email.com" &&
+        localStorage.getItem("Token") ? (
+          <div className={styles.button}>
+            <Button
+              text="Update course"
+              onClick={() => {
+                history.push({
+                  pathname: `/courses/update/${props.course.title}`,
+                  state: { id: props.course.id },
+                });
+              }}
+            />
+            <Button
+              text="Delete course"
+              onClick={() => dispatch(deleteCourse({ id: props.course.id }))}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
 }
+
+CourseCard.propTypes = {
+  course: PropTypes.object,
+  author: PropTypes.string,
+};
 
 export default CourseCard;
