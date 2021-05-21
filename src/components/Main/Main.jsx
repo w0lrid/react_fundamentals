@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
+import { USER } from "../../constants";
 
 import styles from "./Main.module.css";
 
@@ -13,7 +14,7 @@ import UpdateCourse from "../UpdateCourse/UpdateCourse";
 function Main() {
   const history = useHistory();
   const isLogged = !!(
-    localStorage.getItem("Token") && localStorage.getItem("Email")
+    localStorage.getItem(USER.TOKEN) && localStorage.getItem(USER.EMAIL)
   );
   if (!isLogged) history.push("/login");
   return (

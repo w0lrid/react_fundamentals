@@ -1,9 +1,10 @@
 import axios from "axios";
+import { USER } from "../../constants";
 import { createAuthor, setAuthors } from "../reducers/authorReducer";
 
 const headers = {
   "Content-Type": "application/json",
-  Authorization: localStorage.getItem("Token"),
+  Authorization: localStorage.getItem(USER.TOKEN),
 };
 
 export const getAuthors = () => {

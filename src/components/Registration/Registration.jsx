@@ -23,7 +23,6 @@ function Registration() {
       })
       .catch((error) => {
         history.push("/registration");
-        console.log(error.message);
       });
   };
 

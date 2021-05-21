@@ -3,8 +3,9 @@ import { Link, Redirect } from "react-router-dom";
 
 import Input from "../Input/Input";
 import Button from "../Button/Button";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginUser } from "../../store/actions/userActions";
+import { useUserIsAuth } from "../../store/selectors";
 
 function Login() {
   const [passwordLog, setPass] = useState("");
@@ -16,8 +17,7 @@ function Login() {
     password: passwordLog,
   };
 
-  const isAuth = useSelector((state) => state.userReducer.isAuth);
-
+  const isAuth = useUserIsAuth();
   return (
     <div>
       {isAuth ? (

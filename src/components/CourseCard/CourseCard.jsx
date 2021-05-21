@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./CourseCard.module.css";
+import { USER } from "../../constants";
 
 import Button from "../Button/Button";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteCourse } from "../../store/actions/courseActions";
 
 function CourseCard(props) {
-  const history = useHistory();
   const dispatch = useDispatch();
   return (
     <div className={styles.container}>
@@ -36,28 +36,26 @@ function CourseCard(props) {
           </span>
         </div>
         <div className={styles.button}>
-          <Button
-            text="Show course"
-            onClick={() => {
-              history.push({
-                pathname: `/courses/${props.course.title}`,
-                state: { id: props.course.id },
-              });
+          <Link
+            to={{
+              pathname: `/courses/${props.course.title}`,
+              state: { id: props.course.id },
             }}
-          />
+          >
+            <Button text="Show course" />
+          </Link>
         </div>
-        {localStorage.getItem("Email") === "admin@email.com" &&
-        localStorage.getItem("Token") ? (
+        {localStorage.getItem(USER.EMAIL) === USER.ADMIN.EMAIL &&
+        localStorage.getItem(USER.TOKEN) ? (
           <div className={styles.button}>
-            <Button
-              text="Update course"
-              onClick={() => {
-                history.push({
-                  pathname: `/courses/update/${props.course.title}`,
-                  state: { id: props.course.id },
-                });
+            <Link
+              to={{
+                pathname: `/courses/update/${props.course.title}`,
+                state: { id: props.course.id },
               }}
-            />
+            >
+              <Button text="Update course" />
+            </Link>
             <Button
               text="Delete course"
               onClick={() => dispatch(deleteCourse({ id: props.course.id }))}

@@ -5,10 +5,11 @@ import {
   setCourses,
   updCourse,
 } from "../reducers/courseReducer";
+import { USER } from "../../constants";
 
 const headers = {
   "Content-Type": "application/json",
-  Authorization: localStorage.getItem("Token"),
+  Authorization: localStorage.getItem(USER.TOKEN),
 };
 
 export const getCourses = () => {

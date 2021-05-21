@@ -4,15 +4,16 @@ import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import styles from "./NewCourseForm.module.css";
+import { useAuthor } from "../../store/selectors";
 
 import Button from "../Button/Button";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { sendCourse } from "../../store/actions/courseActions";
 import { createAuthorAction } from "../../store/actions/authorActions";
 import InputForm from "../InputForm/InputForm";
 
 function NewCourseForm() {
-  const authors = useSelector((state) => state.authorReducer.authors);
+  const authors = useAuthor();
   const [courseAuthors, setCourseAuthors] = useState([]);
 
   const history = useHistory();
@@ -41,6 +42,8 @@ function NewCourseForm() {
     setCourseAuthors([...courseAuthors, author]);
   };
 
+  let uuid = () => v4();
+
   return (
     <>
       <div data-testid="newcourseform" className={styles.infoContainer}>
@@ -60,7 +63,7 @@ function NewCourseForm() {
       <div className={styles.authorContainer}>
         <h2>Authors</h2>
         {authors.map((author) => (
-          <div data-testid="authors" key={v4()}>
+          <div data-testid="authors" key={uuid}>
             {author.name}{" "}
             <Button
               onClick={() => {

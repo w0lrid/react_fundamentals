@@ -1,26 +1,28 @@
 import React, { useEffect } from "react";
 import styles from "./Header.module.css";
+import { USER } from "../../constants";
+import { useUserName } from "../../store/selectors";
 
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logoutUser } from "../../store/actions/userActions";
-import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 function Header() {
-  const history = useHistory();
-  const name = useSelector((state) => state.userReducer.name);
+  const name = useUserName();
   const dispatch = useDispatch();
 
   const logoutButton = (condition) =>
     condition ? (
-      <Button
-        text="Logout"
-        onClick={() => {
-          dispatch(logoutUser());
-          history.push("/login");
-        }}
-      />
+      <Link to="/login">
+        <Button
+          text="Logout"
+          onClick={() => {
+            dispatch(logoutUser());
+          }}
+        />
+      </Link>
     ) : (
       ""
     );
@@ -36,7 +38,7 @@ function Header() {
         <h1>{name}</h1>
       </div>
       {logoutButton(
-        localStorage.getItem("Email") && localStorage.getItem("Token")
+        localStorage.getItem(USER.EMAIL) && localStorage.getItem(USER.TOKEN)
       )}
     </header>
   );

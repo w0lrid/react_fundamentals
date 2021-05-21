@@ -1,17 +1,21 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { v4 } from "uuid";
 import CourseCard from "../CourseCard/CourseCard";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { getAuthors } from "../../store/actions/authorActions";
+import { useAuthor, useAuthorStatus } from "../../store/selectors";
 
 function Cards({ courses }) {
-  const authors = useSelector((state) => state.authorReducer.authors);
-  const status = useSelector((state) => state.authorReducer.status);
+  const authors = useAuthor();
+  const status = useAuthorStatus();
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (status === false) dispatch(getAuthors());
   });
+
+  let uuid = () => v4();
 
   function searchAuthor(course) {
     return authors
@@ -26,7 +30,7 @@ function Cards({ courses }) {
         return (
           <CourseCard
             data-testid="card"
-            key={v4()}
+            key={uuid}
             course={course}
             author={searchAuthor(course)}
           />

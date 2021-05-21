@@ -1,14 +1,14 @@
 import React from "react";
 import * as redux from "react-redux";
 import "@testing-library/react";
-import { fireEvent, getByText, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import CourseCard from "../components/CourseCard/CourseCard";
 import Cards from "../components/Cards/Cards";
 import Header from "../components/Header/Header";
 import NewCourseForm from "../components/NewCourseForm/NewCourseForm";
-import { container } from "webpack";
+import { BrowserRouter } from "react-router-dom";
 
 const mockedCourse = {
   id: "de5aaa59-90f5-4dbc-b8a9-aaf205c551ba",
@@ -33,18 +33,18 @@ let store = mockStore(initialState);
 describe("CourseCard", () => {
   it("renders with a title", () => {
     render(
-      <Provider store={store}>
+      <BrowserRouter>
         <CourseCard course={mockedCourse} />
-      </Provider>
+      </BrowserRouter>
     );
     expect(screen.getByTestId("title").textContent).toBe("JavaScript");
   });
 
   it("renders with a description", () => {
     render(
-      <Provider store={store}>
+      <BrowserRouter>
         <CourseCard course={mockedCourse} />
-      </Provider>
+      </BrowserRouter>
     );
     expect(screen.getByTestId("description").textContent).toBe(
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
@@ -53,18 +53,18 @@ describe("CourseCard", () => {
 
   it("renders with a piped duration", () => {
     render(
-      <Provider store={store}>
+      <BrowserRouter>
         <CourseCard course={mockedCourse} />
-      </Provider>
+      </BrowserRouter>
     );
     expect(screen.getByTestId("duration").textContent).toBe("160 hours");
   });
 
   it("renders with a date", () => {
     render(
-      <Provider store={store}>
+      <BrowserRouter>
         <CourseCard course={mockedCourse} />
-      </Provider>
+      </BrowserRouter>
     );
     expect(screen.getByTestId("date").textContent).toBe("8/3/2021");
   });
@@ -106,9 +106,9 @@ describe("Courses", () => {
     ]);
 
     const { getByTestId } = render(
-      <Provider store={store}>
+      <BrowserRouter>
         <Cards courses={mockedCourses} />
-      </Provider>
+      </BrowserRouter>
     );
 
     const courses = getByTestId("cards");

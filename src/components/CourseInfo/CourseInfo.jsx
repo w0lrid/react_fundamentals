@@ -18,8 +18,10 @@ function CourseInfo() {
     fetchData();
   }, []);
 
+  let uuid = () => v4();
+
   return (
-    <div key={v4()}>
+    <div key={uuid}>
       <Link to="/courses">
         <div className={styles.link}>&lt;&lt;&lt; back to courses</div>
       </Link>

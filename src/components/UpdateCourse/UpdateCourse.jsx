@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router";
 import styles from "./UpdateCourse.module.css";
 
@@ -9,6 +9,7 @@ import { updateCourse } from "../../store/actions/courseActions";
 import InputForm from "../InputForm/InputForm";
 import Button from "../Button/Button";
 import axios from "axios";
+import { useAuthor } from "../../store/selectors";
 
 function UpdateCourse() {
   const [course, setCourse] = useState({});
@@ -23,7 +24,7 @@ function UpdateCourse() {
     fetchData();
   }, []);
 
-  const authors = useSelector((state) => state.authorReducer.authors);
+  const authors = useAuthor();
   const [courseAuthors, setCourseAuthors] = useState([]);
 
   const history = useHistory();

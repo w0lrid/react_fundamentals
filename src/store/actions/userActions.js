@@ -1,9 +1,10 @@
 import axios from "axios";
 import { login, logout } from "../reducers/userReducer";
+import { USER } from "../../constants";
 
 const headers = {
   "Content-Type": "application/json",
-  Authorization: localStorage.getItem("Token"),
+  Authorization: localStorage.getItem(USER.TOKEN),
 };
 
 export const loginUser = (user) => {
@@ -13,7 +14,6 @@ export const loginUser = (user) => {
       localStorage.setItem("Email", response.data.user.email);
       dispatch(login(response.data));
     });
-    //   .catch(alert("INVALID DATA"));
   };
 };
 
