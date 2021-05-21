@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
+import { ROUTES } from "../../constants";
 
 import Input from "../Input/Input";
 import Button from "../Button/Button";
@@ -21,7 +22,7 @@ function Login() {
   return (
     <div>
       {isAuth ? (
-        <Redirect push to="/courses" />
+        <Redirect push to={ROUTES.COURSES} />
       ) : (
         <>
           <div>Email</div>
@@ -44,7 +45,7 @@ function Login() {
           </div>
           <div>
             If you don't have an account you can{" "}
-            <Link to="/registration">Registration</Link>
+            <Link to={ROUTES.REGISTRATION}>Registration</Link>
           </div>
         </>
       )}

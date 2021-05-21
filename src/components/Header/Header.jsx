@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import styles from "./Header.module.css";
 import { USER } from "../../constants";
 import { useUserName } from "../../store/selectors";
+import { ROUTES } from "../../constants";
 
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
@@ -15,7 +16,7 @@ function Header() {
 
   const logoutButton = (condition) =>
     condition ? (
-      <Link to="/login">
+      <Link to={ROUTES.LOGIN}>
         <Button
           text="Logout"
           onClick={() => {

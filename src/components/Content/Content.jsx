@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import styles from "./Content.module.css";
 import { USER } from "../../constants";
 import { useCourse, useCourseStatus } from "../../store/selectors";
+import { ROUTES } from "../../constants";
 
 import Input from "../Input/Input";
 import Button from "../Button/Button";
@@ -37,7 +38,7 @@ function Content() {
         </div>
         {localStorage.getItem(USER.EMAIL) === USER.ADMIN.EMAIL &&
         localStorage.getItem(USER.TOKEN) ? (
-          <Link to="/courses/add">
+          <Link to={ROUTES.NEW_COURSE}>
             <Button text="Add new course" />
           </Link>
         ) : (

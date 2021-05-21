@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { USER } from "../../constants";
+import { ROUTES } from "../../constants";
 
 import styles from "./Main.module.css";
 
@@ -16,22 +17,22 @@ function Main() {
   const isLogged = !!(
     localStorage.getItem(USER.TOKEN) && localStorage.getItem(USER.EMAIL)
   );
-  if (!isLogged) history.push("/login");
+  if (!isLogged) history.push(ROUTES.LOGIN);
   return (
     <div className={styles.container}>
       <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/registration" component={Registration} />
-        <Route exact path="/courses" component={Content} />
-        <Route exact path="/courses/add" component={NewCourseForm} />
-        <Route path="/courses/update/:title" component={UpdateCourse} />
-        <Route path="/courses/:title" component={CourseInfo} />
+        <Route exact path={ROUTES.LOGIN} component={Login} />
+        <Route exact path={ROUTES.REGISTRATION} component={Registration} />
+        <Route exact path={ROUTES.COURSES} component={Content} />
+        <Route exact path={ROUTES.NEW_COURSE} component={NewCourseForm} />
+        <Route path={ROUTES.UPD_COURSE} component={UpdateCourse} />
+        <Route path={ROUTES.TARGET_COURSE} component={CourseInfo} />
         <Switch>
           <Route
             exact
             path="/"
             render={() => {
-              return <Redirect to="/login" />;
+              return <Redirect to={ROUTES.LOGIN} />;
             }}
           />
         </Switch>

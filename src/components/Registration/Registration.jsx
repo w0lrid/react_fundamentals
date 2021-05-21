@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { ROUTES } from "../../constants";
 
 import Button from "../Button/Button";
 import Input from "../Input/Input";
@@ -19,7 +20,7 @@ function Registration() {
         password: passwordReg,
       })
       .then((response) => {
-        if (response.status === 201) history.push("/login");
+        if (response.status === 201) history.push(ROUTES.LOGIN);
       })
       .catch((error) => {
         history.push("/registration");
@@ -44,12 +45,12 @@ function Registration() {
         onChange={(event) => setPass(event.target.value)}
       />
       <div>
-        <Link to="/login">
+        <Link to={ROUTES.LOGIN}>
           <Button text="Register" onClick={register} />
         </Link>
       </div>
       <div>
-        If you have an account you can <Link to="/login">Login</Link>
+        If you have an account you can <Link to={ROUTES.LOGIN}>Login</Link>
       </div>
     </div>
   );

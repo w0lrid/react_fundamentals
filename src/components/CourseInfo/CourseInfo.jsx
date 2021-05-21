@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import styles from "./CourseInfo.module.css";
 import additionalStyles from "../CourseCard/CourseCard.module.css";
 import axios from "axios";
+import { ROUTES } from "../../constants";
 
 function CourseInfo() {
   const [course, setCourse] = useState({});
@@ -22,7 +23,7 @@ function CourseInfo() {
 
   return (
     <div key={uuid}>
-      <Link to="/courses">
+      <Link to={ROUTES.COURSES}>
         <div className={styles.link}>&lt;&lt;&lt; back to courses</div>
       </Link>
       <div className={styles.title}>{course.title}</div>
