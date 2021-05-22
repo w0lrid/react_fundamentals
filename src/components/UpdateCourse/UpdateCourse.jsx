@@ -89,7 +89,7 @@ function UpdateCourse() {
         <h2>Authors</h2>
         {authors.map((author) => (
           <div>
-            {author.name}{" "}
+            {author.name}
             <Button
               onClick={() => {
                 addAuthor(author);

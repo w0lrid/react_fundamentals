@@ -64,7 +64,7 @@ function NewCourseForm() {
         <h2>Authors</h2>
         {authors.map((author) => (
           <div data-testid="authors" key={uuid}>
-            {author.name}{" "}
+            {author.name}
             <Button
               onClick={() => {
                 addAuthor(author);

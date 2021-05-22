@@ -9,13 +9,13 @@ import { loginUser } from "../../store/actions/userActions";
 import { useUserIsAuth } from "../../store/selectors";
 
 function Login() {
-  const [passwordLog, setPass] = useState("");
-  const [mailLog, setMail] = useState("");
+  const [password, setPass] = useState("");
+  const [email, setMail] = useState("");
   const dispatch = useDispatch();
 
   const user = {
-    email: mailLog,
-    password: passwordLog,
+    email,
+    password,
   };
 
   const isAuth = useUserIsAuth();
@@ -44,8 +44,8 @@ function Login() {
             />
           </div>
           <div>
-            If you don't have an account you can{" "}
-            <Link to={ROUTES.REGISTRATION}>Registration</Link>
+            If you don't have an account you can
+            <Link to={ROUTES.REGISTRATION}> Registration</Link>
           </div>
         </>
       )}

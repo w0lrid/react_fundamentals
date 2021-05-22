@@ -10,12 +10,12 @@ import Input from "../Input/Input";
 
 function Registration() {
   const successful = useSuccessful();
-  const [nameReg, setName] = useState("");
-  const [passwordReg, setPass] = useState("");
-  const [emailReg, setMail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPass] = useState("");
+  const [email, setMail] = useState("");
   const dispatch = useDispatch();
 
-  const user = { name: nameReg, email: emailReg, password: passwordReg };
+  const user = { name, email, password };
   return (
     <div>
       <div>Name</div>
