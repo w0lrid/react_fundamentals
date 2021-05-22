@@ -4,6 +4,7 @@ import reducer from "../courseReducer";
 describe("course reducer", () => {
   it("should return the initial state", () => {
     expect(reducer(undefined, [])).toEqual({
+      course: {},
       courses: [],
       status: false,
     });
