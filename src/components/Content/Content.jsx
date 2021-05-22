@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import styles from "./Content.module.css";
 import { USER } from "../../constants";
-import { useCourse, useCourseStatus } from "../../store/selectors";
+import { useCourses, useCoursesStatus } from "../../store/selectors";
 import { ROUTES } from "../../constants";
 
 import Input from "../Input/Input";
@@ -13,8 +13,8 @@ import Cards from "../Cards/Cards";
 import { getCourses } from "../../store/actions/courseActions";
 
 function Content() {
-  const courses = useCourse();
-  const status = useCourseStatus();
+  const courses = useCourses();
+  const status = useCoursesStatus();
   const [courseName, setCourseName] = useState("");
   const filteredCourses = courses.filter((course) =>
     course.title.toLowerCase().includes(courseName.toLowerCase())

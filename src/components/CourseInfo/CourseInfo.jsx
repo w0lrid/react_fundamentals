@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { v4 } from "uuid";
 import { Link, useLocation } from "react-router-dom";
 import styles from "./CourseInfo.module.css";
 import additionalStyles from "../CourseCard/CourseCard.module.css";
-import axios from "axios";
 import { ROUTES } from "../../constants";
+import { useDispatch } from "react-redux";
+import { getCourse } from "../../store/actions/courseActions";
+import { useCourse } from "../../store/selectors";
 
 function CourseInfo() {
-  const [course, setCourse] = useState({});
+  const course = useCourse();
+  const dispatch = useDispatch();
   const location = useLocation();
 
   useEffect(() => {
-    const fetchData = async (id = location.state.id) => {
-      const response = await axios.get(`http://localhost:3000/courses/${id}`);
-
-      setCourse(response.data.result);
-    };
-    fetchData();
+    dispatch(getCourse(location.state.id));
   }, []);
 
   let uuid = () => v4();

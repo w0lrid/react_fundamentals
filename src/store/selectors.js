@@ -10,14 +10,19 @@ export const useAuthorStatus = () => {
   return status;
 };
 
-export const useCourse = () => {
+export const useCourses = () => {
   const courses = useSelector((state) => state.courseReducer.courses);
   return courses;
 };
 
-export const useCourseStatus = () => {
+export const useCoursesStatus = () => {
   const status = useSelector((state) => state.courseReducer.status);
   return status;
+};
+
+export const useCourse = () => {
+  const course = useSelector((state) => state.courseReducer.course);
+  return course;
 };
 
 export const useUserName = () => {

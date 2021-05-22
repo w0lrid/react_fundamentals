@@ -1,9 +1,11 @@
 const SET_COURSES = "SET_COURSES";
+const SET_COURSE = "SET_COURSE";
 const ADD_COURSE = "ADD_COURSE";
 const UPD_COURSE = "UPD_COURSE";
 const DEL_COURSE = "DEL_COURSE";
 
 const initialState = {
+  course: {},
   courses: [],
   status: false,
 };
@@ -16,7 +18,8 @@ export default function courseReducer(state = initialState, action) {
         courses: action.payload.result,
         status: action.payload.successful,
       };
-
+    case SET_COURSE:
+      return { ...state, course: action.payload.result };
     case ADD_COURSE:
       return { ...state, courses: state.courses.concat(action.payload.result) };
     case UPD_COURSE:
@@ -47,6 +50,11 @@ export default function courseReducer(state = initialState, action) {
 
 export const setCourses = (response) => ({
   type: SET_COURSES,
+  payload: response,
+});
+
+export const setCourse = (response) => ({
+  type: SET_COURSE,
   payload: response,
 });
 

@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   addCourse,
   delCourse,
+  setCourse,
   setCourses,
   updCourse,
 } from "../reducers/courseReducer";
@@ -17,6 +18,14 @@ export const getCourses = () => {
     await axios
       .get("http://localhost:3000/courses/all")
       .then((response) => dispatch(setCourses(response.data)));
+  };
+};
+
+export const getCourse = (id) => {
+  return async (dispatch) => {
+    await axios
+      .get(`http://localhost:3000/courses/${id}`)
+      .then((response) => dispatch(setCourse(response.data)));
   };
 };
 
