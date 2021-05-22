@@ -34,6 +34,7 @@ export default function courseReducer(state = initialState, action) {
             ...action.payload.result,
           };
         }),
+        course: {},
       };
     case DEL_COURSE:
       return {

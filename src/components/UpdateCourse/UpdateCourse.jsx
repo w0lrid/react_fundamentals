@@ -5,23 +5,24 @@ import { useHistory, useLocation } from "react-router";
 import styles from "./UpdateCourse.module.css";
 
 import { createAuthorAction } from "../../store/actions/authorActions";
-import { updateCourse } from "../../store/actions/courseActions";
+import { getCourse, updateCourse } from "../../store/actions/courseActions";
 import InputForm from "../InputForm/InputForm";
 import Button from "../Button/Button";
-import axios from "axios";
-import { useAuthor } from "../../store/selectors";
+import { useAuthor, useCourse } from "../../store/selectors";
 
 function UpdateCourse() {
-  const [course, setCourse] = useState({});
+  const course = useCourse();
+
   const location = useLocation();
 
   useEffect(() => {
-    const fetchData = async (id = location.state.id) => {
+    /* const fetchData = async (id = location.state.id) => {
       const response = await axios.get(`http://localhost:3000/courses/${id}`);
 
       setCourse(response.data.result);
     };
-    fetchData();
+    fetchData(); */
+    dispatch(getCourse(location.state.id));
   }, []);
 
   const authors = useAuthor();
