@@ -1,18 +1,24 @@
-import React, { useState } from "react";
-import { v4 } from "uuid";
-import { useHistory } from "react-router-dom";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import styles from "./NewCourseForm.module.css";
-import { useAuthor } from "../../store/selectors";
-
-import Button from "../Button/Button";
 import { useDispatch } from "react-redux";
-import { sendCourse } from "../../store/actions/courseActions";
-import { createAuthorAction } from "../../store/actions/authorActions";
-import InputForm from "../InputForm/InputForm";
+import { useHistory, useLocation } from "react-router";
+import styles from "./UpdateCourse.module.css";
 
-function NewCourseForm() {
+import { createAuthorAction } from "../../store/actions/authorActions";
+import { getCourse, updateCourse } from "../../store/actions/courseActions";
+import InputForm from "../InputForm/InputForm";
+import Button from "../Button/Button";
+import { useAuthor, useCourse } from "../../store/selectors";
+
+function UpdateCourse() {
+  const course = useCourse();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    dispatch(getCourse(location.state.id));
+  }, []);
+
   const authors = useAuthor();
   const [courseAuthors, setCourseAuthors] = useState([]);
 
@@ -20,13 +26,19 @@ function NewCourseForm() {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const { register: register2, handleSubmit: handleSubmit2 } = useForm();
-  const createCourse = (data) => {
+  const update = (data) => {
     dispatch(
-      sendCourse({
+      updateCourse({
+        id: course.id,
         title: data.title,
         description: data.description,
-        duration: data.duration / 60,
-        authors: courseAuthors.map((author) => author.id),
+        duration:
+          data.duration === course.duration
+            ? Number.parseInt(course.duration)
+            : Number.parseInt(data.duration / 60),
+        authors: course.authors.concat(
+          courseAuthors.map((author) => author.id)
+        ),
       })
     );
     history.push("/courses");
@@ -42,28 +54,41 @@ function NewCourseForm() {
     setCourseAuthors([...courseAuthors, author]);
   };
 
-  let uuid = () => v4();
-
   return (
     <>
-      <div data-testid="newcourseform" className={styles.infoContainer}>
-        <form onSubmit={handleSubmit(createCourse)} className={styles.form}>
-          <InputForm label="title" register={register} required />
-          <InputForm label="description" register={register} required />
-          <Button type="submit" text="Create course" />
+      <div className={styles.infoContainer}>
+        <form onSubmit={handleSubmit(update)} className={styles.form}>
+          <InputForm
+            label="title"
+            placeholder={course.title}
+            register={register}
+            required
+          />
+          <InputForm
+            label="description"
+            placeholder={course.description}
+            register={register}
+            required
+          />
+          <Button type="submit" text="Update course" />
         </form>
         <form onSubmit={handleSubmit2(createNewAuthor)} className={styles.form}>
           <InputForm label="name" register={register2} />
           <Button type="submit" text="Create author" />
         </form>
         <div className={styles.form}>
-          <InputForm label="duration" register={register} required />
+          <InputForm
+            label="duration"
+            placeholder={course.duration}
+            register={register}
+            required
+          />
         </div>
       </div>
       <div className={styles.authorContainer}>
         <h2>Authors</h2>
         {authors.map((author) => (
-          <div data-testid="authors" key={uuid}>
+          <div>
             {author.name}
             <Button
               onClick={() => {
@@ -82,8 +107,4 @@ function NewCourseForm() {
   );
 }
 
-NewCourseForm.propTypes = {
-  state: PropTypes.string,
-};
-
-export default NewCourseForm;
+export default UpdateCourse;

@@ -1,0 +1,22 @@
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #d05eda;
+  border-radius: 5px;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+}
+
+.authorContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #5eda92;
+  border-radius: 5px;
+}

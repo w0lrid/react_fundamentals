@@ -1,9 +1,18 @@
-function Button(props) {
+import React from "react";
+import PropTypes from "prop-types";
+import styles from "./Button.module.css";
+
+function Button(props, { type }) {
   return (
-    <button type="button" className="btn border-info" onClick={props.onClick}>
+    <button type={type} onClick={props.onClick}>
       {props.text}
     </button>
   );
 }
+
+Button.propTypes = {
+  text: PropTypes.string,
+  onClick: PropTypes.func,
+};
 
 export default Button;
