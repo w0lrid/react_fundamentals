@@ -25,6 +25,11 @@ export const useCourse = () => {
   return course;
 };
 
+export const useSuccessful = () => {
+  const successful = useSelector((state) => state.userReducer.successful);
+  return successful;
+};
+
 export const useUserName = () => {
   const name = useSelector((state) => state.userReducer.name);
   return name;

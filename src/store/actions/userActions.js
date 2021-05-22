@@ -1,10 +1,18 @@
 import axios from "axios";
-import { login, logout } from "../reducers/userReducer";
+import { login, logout, register } from "../reducers/userReducer";
 import { USER } from "../../constants";
 
 const headers = {
   "Content-Type": "application/json",
   Authorization: localStorage.getItem(USER.TOKEN),
+};
+
+export const registerUser = (user) => {
+  return async (dispatch) => {
+    await axios
+      .post("http://localhost:3000/register", user)
+      .then((response) => dispatch(register(response.data.successful)));
+  };
 };
 
 export const loginUser = (user) => {

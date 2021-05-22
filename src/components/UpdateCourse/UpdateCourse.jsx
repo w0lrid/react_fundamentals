@@ -16,12 +16,6 @@ function UpdateCourse() {
   const location = useLocation();
 
   useEffect(() => {
-    /* const fetchData = async (id = location.state.id) => {
-      const response = await axios.get(`http://localhost:3000/courses/${id}`);
-
-      setCourse(response.data.result);
-    };
-    fetchData(); */
     dispatch(getCourse(location.state.id));
   }, []);
 

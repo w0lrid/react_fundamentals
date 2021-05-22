@@ -1,32 +1,21 @@
-import axios from "axios";
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { ROUTES } from "../../constants";
+import { registerUser } from "../../store/actions/userActions";
+import { useSuccessful } from "../../store/selectors";
 
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 
 function Registration() {
+  const successful = useSuccessful();
   const [nameReg, setName] = useState("");
   const [passwordReg, setPass] = useState("");
   const [emailReg, setMail] = useState("");
-  const history = useHistory();
+  const dispatch = useDispatch();
 
-  const register = () => {
-    axios
-      .post("http://localhost:3000/register", {
-        name: nameReg,
-        email: emailReg,
-        password: passwordReg,
-      })
-      .then((response) => {
-        if (response.status === 201) history.push(ROUTES.LOGIN);
-      })
-      .catch((error) => {
-        history.push("/registration");
-      });
-  };
-
+  const user = { name: nameReg, email: emailReg, password: passwordReg };
   return (
     <div>
       <div>Name</div>
@@ -45,8 +34,11 @@ function Registration() {
         onChange={(event) => setPass(event.target.value)}
       />
       <div>
-        <Link to={ROUTES.LOGIN}>
-          <Button text="Register" onClick={register} />
+        <Link to={successful ? ROUTES.LOGIN : ROUTES.REGISTRATION}>
+          <Button
+            text="Register"
+            onClick={() => dispatch(registerUser(user))}
+          />
         </Link>
       </div>
       <div>
